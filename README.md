@@ -1,6 +1,6 @@
-# The Astronomical Register — Searchable Index
+# Monthly Notices of the Royal Astronomical Society — Searchable Index
 
-A GitHub Pages site for exploring the general index of *The Astronomical Register*, covering Volumes I–XXXVI. The index contains **9,108 entries** across authors, subjects, asteroids, comets, and more.
+A GitHub Pages site for exploring the general index of the *Monthly NOtices of the Royal Astronomical Society*, covering Volumes I–XXXVI. The index contains **9,108 entries** across authors, subjects, asteroids, comets, and more.
 
 ## Files
 
@@ -9,14 +9,6 @@ A GitHub Pages site for exploring the general index of *The Astronomical Registe
 ├── index_data.json   ← The index data (9,108 records)
 └── README.md
 ```
-
-## Deploying to GitHub Pages
-
-1. Create a new GitHub repository.
-2. Push these files to the `main` (or `master`) branch.
-3. Go to **Settings → Pages**.
-4. Under *Source*, select **Deploy from a branch** → `main` → `/ (root)`.
-5. Click **Save**. Your site will be live at `https://<your-username>.github.io/<repo-name>/` within a minute or two.
 
 ## Using the Search Interface
 
