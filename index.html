@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astronomical Register — Index</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:       #1a1208;
+      --ink-mid:   #3d2f1a;
+      --ink-light: #7a6248;
+      --paper:     #f5eed8;
+      --paper-warm:#ede2c4;
+      --paper-dark:#d9cca8;
+      --ruled:     rgba(90,70,40,0.10);
+      --accent:    #8b1a1a;
+      --gold:      #b5892a;
+      --gold-light:#d4aa50;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Libre Baskerville', Georgia, serif;
+      min-height: 100vh;
+      /* aged paper texture via repeating lines */
+      background-image:
+        repeating-linear-gradient(
+          180deg,
+          transparent,
+          transparent 27px,
+          var(--ruled) 27px,
+          var(--ruled) 28px
+        ),
+        radial-gradient(ellipse at 20% 10%, rgba(200,175,110,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 90%, rgba(160,130,70,0.18) 0%, transparent 55%);
+    }
+
+    /* ── MASTHEAD ── */
+    header {
+      border-bottom: 3px double var(--ink-mid);
+      padding: 2.5rem 2rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+    header::before, header::after {
+      content: '✦ ✦ ✦';
+      display: block;
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.5em;
+      margin-bottom: 0.5rem;
+    }
+    header::after {
+      margin-top: 0.75rem;
+      margin-bottom: 0;
+    }
+    .masthead-rule {
+      border: none;
+      border-top: 1px solid var(--ink-light);
+      margin: 0.4rem auto;
+      width: 60%;
+    }
+    .masthead-title {
+      font-family: 'IM Fell English SC', serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .masthead-subtitle {
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      color: var(--ink-mid);
+      margin-top: 0.35rem;
+      letter-spacing: 0.02em;
+    }
+    .masthead-meta {
+      font-size: 0.72rem;
+      color: var(--ink-light);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-top: 0.6rem;
+    }
+
+    /* ── LAYOUT ── */
+    .shell {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.25rem 4rem;
+    }
+
+    /* ── SEARCH PANEL ── */
+    .search-panel {
+      background: var(--paper-warm);
+      border: 1px solid var(--paper-dark);
+      border-top: none;
+      border-radius: 0 0 4px 4px;
+      padding: 1.5rem 1.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+
+    .search-row {
+      display: flex;
+      gap: 0.6rem;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .search-input-wrap {
+      flex: 1 1 260px;
+      position: relative;
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-light);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+    input[type="text"], select {
+      width: 100%;
+      background: var(--paper);
+      border: 1px solid var(--paper-dark);
+      border-radius: 2px;
+      padding: 0.6rem 0.75rem 0.6rem 2.2rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.92rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    select { padding-left: 0.75rem; cursor: pointer; }
+    input[type="text"]:focus, select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(181,137,42,0.15);
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 0.65rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-row select { flex: 1 1 150px; }
+
+    .btn {
+      padding: 0.6rem 1.2rem;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+    }
+    .btn-primary:hover { background: var(--accent); border-color: var(--accent); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink-mid);
+      border-color: var(--paper-dark);
+    }
+    .btn-ghost:hover { background: var(--paper-dark); }
+
+    .search-tips {
+      font-size: 0.73rem;
+      color: var(--ink-light);
+      font-style: italic;
+      margin-top: 0.65rem;
+    }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--paper-dark);
+      margin-bottom: 0.9rem;
+      font-size: 0.78rem;
+      color: var(--ink-light);
+    }
+    .stats-bar strong { color: var(--ink-mid); }
+    .sort-wrap { display: flex; align-items: center; gap: 0.4rem; }
+    .sort-wrap select { width: auto; font-size: 0.78rem; padding: 0.2rem 0.4rem 0.2rem 0.4rem; }
+
+    /* ── RESULTS ── */
+    #results-list { list-style: none; }
+
+    .entry {
+      border-bottom: 1px solid var(--ruled);
+      padding: 0.85rem 0.25rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.3rem 1rem;
+      cursor: pointer;
+      transition: background 0.1s;
+      border-radius: 2px;
+    }
+    .entry:hover { background: rgba(181,137,42,0.07); }
+    .entry:hover .entry-desc { color: var(--ink); }
+
+    .entry-left { grid-column: 1; }
+    .entry-right { grid-column: 2; text-align: right; align-self: start; white-space: nowrap; }
+
+    .entry-subject {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 0.95rem;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+    }
+    .entry-sub {
+      font-size: 0.78rem;
+      color: var(--ink-light);
+      font-style: italic;
+      margin-left: 0.3em;
+    }
+    .entry-desc {
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      margin-top: 0.18rem;
+      line-height: 1.45;
+    }
+    .entry-author {
+      font-size: 0.75rem;
+      color: var(--ink-light);
+      margin-top: 0.1rem;
+      font-style: italic;
+    }
+    .entry-refs {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-family: 'IM Fell English SC', serif;
+      letter-spacing: 0.03em;
+    }
+    .entry-refs span { color: var(--ink-light); }
+
+    mark {
+      background: rgba(181,137,42,0.25);
+      color: inherit;
+      border-radius: 1px;
+      padding: 0 1px;
+    }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .page-btn {
+      min-width: 2rem;
+      height: 2rem;
+      padding: 0 0.5rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.82rem;
+      border: 1px solid var(--paper-dark);
+      background: var(--paper-warm);
+      color: var(--ink-mid);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .page-btn:hover { background: var(--paper-dark); }
+    .page-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+      border-color: var(--ink);
+      font-weight: bold;
+    }
+    .page-btn:disabled { opacity: 0.35; cursor: default; }
+    .page-ellipsis { color: var(--ink-light); padding: 0 0.2rem; }
+
+    /* ── DETAIL MODAL ── */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(20,14,6,0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 1rem;
+    }
+    .modal-backdrop.open { display: flex; }
+
+    .modal {
+      background: var(--paper);
+      border: 1px solid var(--paper-dark);
+      border-radius: 4px;
+      max-width: 580px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+      padding: 2rem;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 0.9rem; right: 1rem;
+      background: none; border: none;
+      font-size: 1.2rem;
+      color: var(--ink-light);
+      cursor: pointer;
+      line-height: 1;
+    }
+    .modal-close:hover { color: var(--accent); }
+    .modal-subject {
+      font-family: 'IM Fell English SC', serif;
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 0.15rem;
+    }
+    .modal-sub {
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--ink-light);
+      margin-bottom: 0.9rem;
+    }
+    .modal-rule { border: none; border-top: 1px solid var(--paper-dark); margin: 0.9rem 0; }
+    .modal-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 0.2rem;
+    }
+    .modal-value {
+      font-size: 0.93rem;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .modal-refs-list {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .ref-badge {
+      background: var(--paper-warm);
+      border: 1px solid var(--paper-dark);
+      border-radius: 2px;
+      padding: 0.25rem 0.55rem;
+      font-family: 'IM Fell English SC', serif;
+      font-size: 0.82rem;
+      color: var(--ink-mid);
+      letter-spacing: 0.03em;
+    }
+    .modal-raw {
+      font-size: 0.78rem;
+      color: var(--ink-light);
+      font-style: italic;
+      margin-top: 0.4rem;
+      padding: 0.5rem 0.75rem;
+      background: var(--paper-warm);
+      border-left: 2px solid var(--paper-dark);
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+    .empty-state strong { display: block; font-size: 1.05rem; color: var(--ink-mid); margin-bottom: 0.4rem; }
+
+    /* ── LOADING ── */
+    .loading {
+      text-align: center;
+      padding: 3rem;
+      color: var(--ink-light);
+      font-style: italic;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .search-panel { padding: 1rem; }
+      .modal { padding: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="masthead-title">The Astronomical Register</div>
+    <hr class="masthead-rule" />
+    <div class="masthead-subtitle">General Index of Papers &amp; Communications</div>
+    <div class="masthead-meta">Volumes I – XXXVI &nbsp;·&nbsp; Searchable Archive</div>
+  </header>
+
+  <div class="shell">
+    <!-- Search Panel -->
+    <div class="search-panel">
+      <div class="search-row">
+        <div class="search-input-wrap">
+          <span class="search-icon">⚲</span>
+          <input type="text" id="query" placeholder="Search by subject, description, author…" autocomplete="off" />
+        </div>
+        <button class="btn btn-primary" onclick="doSearch()">Search</button>
+        <button class="btn btn-ghost" onclick="clearSearch()">Clear</button>
+      </div>
+      <div class="filter-row">
+        <select id="filter-volume" title="Filter by volume">
+          <option value="">All Volumes</option>
+        </select>
+        <select id="filter-subject" title="Filter by main subject">
+          <option value="">All Subjects</option>
+        </select>
+        <select id="filter-field" title="Search field">
+          <option value="all">All Fields</option>
+          <option value="main_subject">Subject</option>
+          <option value="description">Description</option>
+          <option value="author">Author</option>
+          <option value="sub_subject">Sub-Subject</option>
+        </select>
+      </div>
+      <div class="search-tips">
+        Tip: Search is case-insensitive. Use the filters to narrow by volume or subject category.
+      </div>
+    </div>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <span id="result-count">Loading…</span>
+      <div class="sort-wrap">
+        Sort by:
+        <select id="sort-by" onchange="doSearch()">
+          <option value="relevance">Relevance</option>
+          <option value="subject">Subject A–Z</option>
+          <option value="volume">Volume</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="results-area">
+      <div class="loading">Loading index data…</div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal-backdrop" id="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal" id="modal-box">
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
+
+  <script>
+    // ── CONFIG ──
+    const PER_PAGE = 50;
+    let allData   = [];
+    let filtered  = [];
+    let currentPage = 1;
+    let lastQuery = '';
+
+    // Roman numeral sort order
+    const ROMAN_ORDER = ['i','ii','iii','iv','v','vi','vii','viii','ix','x',
+      'xi','xii','xiii','xiv','xv','xvi','xvii','xviii','xix','xx',
+      'xxi','xxii','xxiii','xxiv','xxv','xxvi','xxvii','xxviii','xxix','xxx',
+      'xxxi','xxxii','xxxiii','xxxiv','xxxv','xxxvi'];
+    const romanIdx = v => { const i = ROMAN_ORDER.indexOf(v); return i >= 0 ? i : 999; };
+
+    // ── LOAD DATA ──
+    async function loadData() {
+      try {
+        const res = await fetch('index_data.json');
+        allData = await res.json();
+        populateFilters();
+        doSearch();
+      } catch (e) {
+        document.getElementById('results-area').innerHTML =
+          '<div class="empty-state"><strong>Could not load index data.</strong>Ensure index_data.json is in the same directory.</div>';
+      }
+    }
+
+    function populateFilters() {
+      // Volumes
+      const vols = [...new Set(allData.flatMap(d => (d.references||[]).map(r => r.volume).filter(Boolean)))];
+      vols.sort((a,b) => romanIdx(a) - romanIdx(b));
+      const volSel = document.getElementById('filter-volume');
+      vols.forEach(v => {
+        const o = document.createElement('option');
+        o.value = v; o.textContent = `Vol. ${v.toUpperCase()}`;
+        volSel.appendChild(o);
+      });
+
+      // Subjects
+      const subs = [...new Set(allData.map(d => d.main_subject).filter(Boolean))].sort();
+      const subSel = document.getElementById('filter-subject');
+      subs.forEach(s => {
+        const o = document.createElement('option');
+        o.value = s; o.textContent = s;
+        subSel.appendChild(o);
+      });
+    }
+
+    // ── SEARCH ──
+    function doSearch() {
+      const q     = document.getElementById('query').value.trim().toLowerCase();
+      const vol   = document.getElementById('filter-volume').value;
+      const subj  = document.getElementById('filter-subject').value;
+      const field = document.getElementById('filter-field').value;
+      const sort  = document.getElementById('sort-by').value;
+
+      lastQuery = q;
+      currentPage = 1;
+
+      filtered = allData.filter(d => {
+        // Volume filter
+        if (vol && !((d.references||[]).some(r => r.volume === vol))) return false;
+        // Subject filter
+        if (subj && d.main_subject !== subj) return false;
+        // Text search
+        if (q) {
+          const targets = field === 'all'
+            ? [d.main_subject, d.sub_subject, d.description, d.author, d.qualifier].filter(Boolean).join(' ')
+            : String(d[field] || '');
+          if (!targets.toLowerCase().includes(q)) return false;
+        }
+        return true;
+      });
+
+      // Sort
+      if (sort === 'subject') {
+        filtered.sort((a,b) => (a.main_subject||'').localeCompare(b.main_subject||''));
+      } else if (sort === 'volume') {
+        filtered.sort((a,b) => {
+          const av = (a.references||[])[0]?.volume || '';
+          const bv = (b.references||[])[0]?.volume || '';
+          return romanIdx(av) - romanIdx(bv);
+        });
+      }
+      // relevance: keep original order (already ordered by subject in source)
+
+      renderResults();
+      renderPagination();
+      updateCount();
+    }
+
+    function clearSearch() {
+      document.getElementById('query').value = '';
+      document.getElementById('filter-volume').value = '';
+      document.getElementById('filter-subject').value = '';
+      document.getElementById('filter-field').value = 'all';
+      document.getElementById('sort-by').value = 'relevance';
+      doSearch();
+    }
+
+    // ── HIGHLIGHT ──
+    function highlight(text, q) {
+      if (!q || !text) return escHtml(text || '');
+      const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return escHtml(text).replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ── RENDER ──
+    function renderResults() {
+      const area = document.getElementById('results-area');
+      if (filtered.length === 0) {
+        area.innerHTML = '<div class="empty-state"><strong>No entries found.</strong>Try broadening your search or clearing the filters.</div>';
+        return;
+      }
+      const start = (currentPage - 1) * PER_PAGE;
+      const page  = filtered.slice(start, start + PER_PAGE);
+      const q = lastQuery;
+
+      const ul = document.createElement('ul');
+      ul.id = 'results-list';
+
+      page.forEach((d, i) => {
+        const li = document.createElement('li');
+        li.className = 'entry';
+        li.setAttribute('role', 'button');
+        li.setAttribute('tabindex', '0');
+        li.addEventListener('click', () => openModal(start + i));
+        li.addEventListener('keydown', e => { if (e.key === 'Enter') openModal(start + i); });
+
+        const refs = (d.references || [])
+          .map(r => `<span>Vol.</span> ${r.volume.toUpperCase()}${r.page ? ` · p.${r.page}` : ''}`)
+          .join('&emsp;');
+
+        li.innerHTML = `
+          <div class="entry-left">
+            <div class="entry-subject">
+              ${highlight(d.main_subject, q)}
+              ${d.sub_subject ? `<span class="entry-sub">— ${highlight(d.sub_subject, q)}</span>` : ''}
+            </div>
+            ${d.description ? `<div class="entry-desc">${highlight(d.description, q)}</div>` : ''}
+            ${d.author ? `<div class="entry-author">${highlight(d.author, q)}</div>` : ''}
+          </div>
+          <div class="entry-right">
+            <div class="entry-refs">${refs}</div>
+          </div>`;
+        ul.appendChild(li);
+      });
+
+      area.innerHTML = '';
+      area.appendChild(ul);
+    }
+
+    function updateCount() {
+      const el = document.getElementById('result-count');
+      const n = filtered.length;
+      const total = allData.length;
+      if (!lastQuery && !document.getElementById('filter-volume').value && !document.getElementById('filter-subject').value) {
+        el.innerHTML = `Showing all <strong>${total.toLocaleString()}</strong> entries`;
+      } else {
+        el.innerHTML = `<strong>${n.toLocaleString()}</strong> of ${total.toLocaleString()} entries`;
+      }
+    }
+
+    // ── PAGINATION ──
+    function renderPagination() {
+      const total = Math.ceil(filtered.length / PER_PAGE);
+      const nav   = document.getElementById('pagination');
+      nav.innerHTML = '';
+      if (total <= 1) return;
+
+      const addBtn = (label, page, disabled, active) => {
+        const b = document.createElement('button');
+        b.className = 'page-btn' + (active ? ' active' : '');
+        b.textContent = label;
+        b.disabled = disabled;
+        b.addEventListener('click', () => { currentPage = page; renderResults(); renderPagination(); window.scrollTo({top:0,behavior:'smooth'}); });
+        nav.appendChild(b);
+      };
+
+      addBtn('‹ Prev', currentPage - 1, currentPage === 1, false);
+
+      const pages = paginationPages(currentPage, total);
+      let prev = null;
+      pages.forEach(p => {
+        if (prev !== null && p - prev > 1) {
+          const sp = document.createElement('span');
+          sp.className = 'page-ellipsis';
+          sp.textContent = '…';
+          nav.appendChild(sp);
+        }
+        addBtn(p, p, false, p === currentPage);
+        prev = p;
+      });
+
+      addBtn('Next ›', currentPage + 1, currentPage === total, false);
+    }
+
+    function paginationPages(cur, total) {
+      if (total <= 7) return Array.from({length: total}, (_, i) => i + 1);
+      const pages = new Set([1, total, cur, cur-1, cur+1].filter(p => p >= 1 && p <= total));
+      return [...pages].sort((a,b) => a-b);
+    }
+
+    // ── MODAL ──
+    function openModal(idx) {
+      const d = filtered[idx];
+      if (!d) return;
+      const refs = (d.references || []).map(r =>
+        `<span class="ref-badge">Vol. ${r.volume.toUpperCase()}${r.page ? ` · p.${r.page}` : ''}</span>`
+      ).join('');
+
+      document.getElementById('modal-content').innerHTML = `
+        <div class="modal-subject">${escHtml(d.main_subject || '—')}</div>
+        ${d.sub_subject ? `<div class="modal-sub">${escHtml(d.sub_subject)}${d.qualifier ? ` ${escHtml(d.qualifier)}` : ''}</div>` : ''}
+        <hr class="modal-rule">
+        ${d.description ? `
+          <div class="modal-label">Description</div>
+          <div class="modal-value">${escHtml(d.description)}</div>` : ''}
+        ${d.author ? `
+          <div class="modal-label">Author / Contributor</div>
+          <div class="modal-value">${escHtml(d.author)}</div>` : ''}
+        <div class="modal-label">References</div>
+        <div class="modal-value"><div class="modal-refs-list">${refs || '<em style="color:var(--ink-light)">None recorded</em>'}</div></div>
+        <hr class="modal-rule">
+        <div class="modal-label">Original Index Line</div>
+        <div class="modal-raw">${escHtml(d.raw_line || '—')}</div>`;
+
+      document.getElementById('modal-backdrop').classList.add('open');
+      document.getElementById('modal-box').scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+      if (e.target === document.getElementById('modal-backdrop')) closeModalDirect();
+    }
+    function closeModalDirect() {
+      document.getElementById('modal-backdrop').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+    // ── KEYBOARD SEARCH ──
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('query').addEventListener('keydown', e => {
+        if (e.key === 'Enter') doSearch();
+      });
+      loadData();
+    });
+  </script>
+</body>
+</html>
